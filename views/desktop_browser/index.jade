@@ -1,0 +1,24 @@
+include header
+script
+div.container-fluid
+	div.row-fluid
+		div.span6
+			p &nbsp;
+			h2 Sign in
+			form.well(action='/',method='post',name='signup',id='signup')
+				fieldset(align='center')
+					- if(!session.auth)
+						div.control-group
+							div.controls
+								a(href='auth/facebook')
+									img(src='img/Button_Facebook.png')
+						div.control-group
+							div.controls
+								a(href='auth/twitter')
+									img(src='img/Button_Twitter.png')
+					- else
+						div.control-group
+							div.controls
+								a(href='/logout')
+									button(type='button',class='btn-large btn-primary') Logout
+include footer
