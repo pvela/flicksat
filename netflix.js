@@ -64,7 +64,8 @@ n.get('/catalog/people', { term: 'Bruce Willis' }).end(function() {
 });
 */
 exports.search = function(title,cb) {
-	n.get('/catalog/titles', { term: title}).end(function() {
+	n.get('/catalog/titles', { term: title,include_amg:"true"}).end(function() {
+		//console.dir(this);
 		var netflixMovies = this.toJSON().catalog_titles.catalog_title;
 		var movies = new moviesCollectionDef([]);
 		if (netflixMovies && netflixMovies.length>0) {
@@ -72,6 +73,7 @@ exports.search = function(title,cb) {
 			//console.dir(this.toJSON().catalog_titles.catalog_title[0].box_art.large);
 			for(var i=0;i<netflixMovies.length;i++) {
 				var netflixMovie = netflixMovies[i];
+				console.dir(netflixMovie);
 				var movie = new movieModelDef(netflixMovie);
                 movies.add(movie);
 	        }

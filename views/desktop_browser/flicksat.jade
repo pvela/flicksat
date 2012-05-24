@@ -1,0 +1,48 @@
+include header
+script
+	function flickIt (btn,id) {
+		$.ajax({
+			type: 'POST',
+			url: '/addtoq',
+			data: {"titleid":id},
+			success: function (data) {
+				if (data.response == 'success') {
+					alert(data.response);
+				} else {
+					alert(data.response);
+				}
+				btn.disabled = true;
+				btn.value = 'Flicked';
+				console.log(btn);
+				console.log(data);
+				
+			}
+		});
+	}
+div.container-fluid
+	hr
+	div.row-fluid
+		div.span6
+			<div class="container">
+			<div class="hero-unit">
+			<h1>Flicks@</h1>
+			</div>
+			<div class="row">
+			<div class="span4">
+			<p><h2>#{movie.name}</h2> <img src=#{movie.img} alt="" /></p>
+			<p><h2>Who doesn't like flicking #{movie.name}</h2></p>
+			</div>
+			<div class="span4">
+			#{movie.synopsis}
+			<form action="results" method="post" class="well">
+			<label>Who are you flicking to?</label>  
+			<input type="text" class="span3" placeholder="Email Address" name="emailaddress">  
+			<input type="button" onClick="flickIt(this,'#{movie.titleid}')" value="FlickIt" class="btn"/>  
+			</form>        
+			</div>
+			<div class="row">
+			<div class="span16">
+			</div>
+			</div>
+			</div>
+include footer

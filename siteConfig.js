@@ -1,7 +1,7 @@
 var settings = {
 	'sessionSecret': 'flicksat'
 	, 'port': 80
-	, 'uri': 'http://flicksat.com:80' // Without trailing /
+	, 'uri': 'http://flicksat.jit.su' // Without trailing /
 	, 'debug': (process.env.NODE_ENV !== 'production')
 	, 'external': {
                 'facebook': {

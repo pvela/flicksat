@@ -1,10 +1,10 @@
 include header
 script
-	function flickIt (btn,id) {
+	function flickIt (btn,id,cid) {
 		$.ajax({
 			type: 'POST',
 			url: '/addtoq',
-			data: {"titleid":id},
+			data: {"titleid":id,"cid":cid},
 			success: function (data) {
 				if (data.response == 'success') {
 					alert(data.response);
@@ -31,17 +31,19 @@ div.container-fluid
 		<div class="span4">
 		<p><h2>Flick Movies at Your Friends.</h2> </p><p><h2>They'll Love It.</h2><h2>Or Hate You.</h2><br><br><h2>It's Up to You.</h2> </p>
 		</div>
-		<div class="span4">
-		</div>
 		<div class="row">
 		<div class="span16">
 		<ul class="media-grid">
 		h3.error_message 
 		- if (movies)
 			- each movie in movies
-				<ul><a href="#"><img src=#{movie.attributes.box_art.large} alt="" /></a>#{movie.attributes.title.regular}
-				<form action="/addtoq" method="POST"><input type="hidden" name="titleid" value="#{movie.attributes.id}"/>
-				<input type="button" onClick="flickIt(this,'#{movie.attributes.id}')" class="btn" value="FlickIt"/> </form></ul>
+				<ul><a href="#"><img src=#{movie.attributes.box_art.large} alt="" /></a>
+				<form action="/getmovie" method="POST"><input type="hidden" name="titleid" value="#{movie.attributes.id}"/>
+				<input type="hidden" name="cid" value="#{movie.attributes.cid}"/>
+				<input type="hidden" name="moviename" value="#{movie.attributes.title.regular}"/>
+				<input type="hidden" name="img" value="#{movie.attributes.box_art.large}"/>
+				h3 #{movie.attributes.title.regular}
+				<input type="submit" class="btn" value="Select for Flicking"/> </form></ul>
 		</ul>
 		</div>
 		</div>
