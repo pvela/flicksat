@@ -52,40 +52,50 @@ app.dynamicHelpers({
 
 // application related includes
 
-//require('./il/desktop_browser/il_user')(app);
-
-//app.put('/',user.put);
 
 app.get('/', function(req, res){
     res.render(viewPath+'index', {title: 'flicksat'});
 });
 
-app.get('/signup', function(req, res){
+/*app.get('/signup', function(req, res){
     res.render(viewPath+'signup', {title: 'flicksat'});
 });
+*/
 
 app.post('/search', function(req,res) {
-	console.log('querying for movie'+req.body.moviename);
-	netflix.search(req.body.moviename, function(err, movies) {
-		console.log(movies.models.length + 'movies found');
-		res.render(viewPath+'/results',{"movies" : movies.models});	
-	});
+	if (req.session.auth && req.session.auth.loggedIn) {
+		console.log('querying for movie'+req.body.moviename);
+		netflix.search(req.body.moviename, function(err, movies) {
+			console.log(movies.models.length + 'movies found');
+			res.render(viewPath+'/results',{"movies" : movies.models});	
+		});
+	} else {
+		res.render(viewPath+'index', {title: 'flicksat'});
+	}
 });
 
 app.post('/addtoq', function(req,res) {
+if (req.session.auth && req.session.auth.loggedIn) {
 	console.log('adding movie'+req.body.titleid);
 	netflix.addtoq(req.body.titleid, function(err) {
 		res.send({response:err});	
 	});
+} else {
+		res.render(viewPath+'index', {title: 'flicksat'});
+}
 });
 
-app.get('/results', function(req,res) {
+/*app.get('/results', function(req,res) {
 	res.render(viewPath+'/results', {title: 'Flicksat'});
-});
+});*/
 
 
 app.get('/search', function(req,res) {
+if (req.session.auth && req.session.auth.loggedIn) {
 	res.render(viewPath+'/search', {title: 'Flicksat'});
+} else {
+		res.render(viewPath+'index', {title: 'flicksat'});
+	}
 });
 
 // Error handling

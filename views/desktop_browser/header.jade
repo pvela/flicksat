@@ -36,7 +36,7 @@ div.navbar.navbar-fixed-top
 								a.dropdown-toggle(href='#',data-toggle='dropdown') #{everyauth.twitter.user.screen_name}
 								b.caret
 								ul.dropdown-menu
-									li: a(href='#') Logout
+									li: a(href='/logout') Logout
 
 							- else if (everyauth.facebook)
 								a.dropdown-toggle(href='#',data-toggle='dropdown') #{everyauth.facebook.user.name}

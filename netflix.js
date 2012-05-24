@@ -41,9 +41,8 @@ exports.addtoq = function(title, cb) {
 	if (title.indexOf('http://api.netflix.com/') >-1) {
 		title = title.substring(22); //22 or 45
 	}
-	console.log(title);
 	n.post('/users/:user_id/queues/instant', { title_ref: title}, function(data) {
-		console.dir(this);
+		//console.dir(this);
 	    if(this.data.status && this.data.status.message == 'success') {
     	    console.log('Item successfully added to instant queue!')
     	    cb("This movie is added to queue successfully");
@@ -69,8 +68,8 @@ exports.search = function(title,cb) {
 		var netflixMovies = this.toJSON().catalog_titles.catalog_title;
 		var movies = new moviesCollectionDef([]);
 		if (netflixMovies && netflixMovies.length>0) {
-			console.dir(this.toJSON().catalog_titles.catalog_title[0].title.regular);
-			console.dir(this.toJSON().catalog_titles.catalog_title[0].box_art.large);
+			//console.dir(this.toJSON().catalog_titles.catalog_title[0].title.regular);
+			//console.dir(this.toJSON().catalog_titles.catalog_title[0].box_art.large);
 			for(var i=0;i<netflixMovies.length;i++) {
 				var netflixMovie = netflixMovies[i];
 				var movie = new movieModelDef(netflixMovie);
